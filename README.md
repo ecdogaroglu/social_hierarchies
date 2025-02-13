@@ -15,6 +15,8 @@ the asymptotic behavior of this social system.
 
 See social_hierarchies.pdf for the related research paper including the theory developed and a discussion of the computational results.
 
+An implementation of Young (1993) can be found here: https://github.com/ecdogaroglu/evolution_of_conventions.git
+
 ## Usage
 
 To get started, create and activate the environment with
