@@ -31,7 +31,6 @@ To build the project, type
 ```console
 $ pytask
 ```
-Runtime is around 10 minutes with the default configuration.
 
 
 ## Modules
