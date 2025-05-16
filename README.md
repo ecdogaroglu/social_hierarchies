@@ -47,10 +47,9 @@ social-hierarchies/
 ├── paper/                       # Documentation/research outputs
 └── bld/                         # Build directory for results
 
-
 Example: Setting Parameters
 Edit src/social_hierarchies/task_parameters.py to configure your simulation:
-pythonparameters = {
+parameters = {
     "m": 2,              # memory size
     "k": 1,              # sample size
     "epsilon": 0.0001,   # experimentation probability
@@ -64,6 +63,8 @@ parameters["payoffs"] = np.array([
     [(1, 1), (0, -1)],
     [(-1, 0), (1, 1)]
 ])
+
+
 Key Concepts
 
 State Space: Represents the history of play between agents
