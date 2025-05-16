@@ -5,7 +5,8 @@
 [![image](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 A Python implementation for analyzing the emergence and stability of social hierarchies through evolutionary game theory and stochastic processes.
-Description
+
+## Description
 This repository contains a collection of tools for modeling strategic interactions between players using Markov chains and graph theory. The main focus is on identifying stochastically stable states and minimum stochastic potential equilibria, which help understand how social hierarchies emerge and persist over time.
 
 See social_hierarchies.pdf for the related research paper including the theory developed and a discussion of the computational results.
@@ -27,7 +28,9 @@ To build the project, type
 $ pytask
 ```
 
-Project Structure
+## Project Structure
+
+```
 social-hierarchies/
 ├── src/
 │   └── social_hierarchies/
@@ -46,9 +49,13 @@ social-hierarchies/
 │       └── task_parameters.py   # Parameter management
 ├── paper/                       # Documentation/research outputs
 └── bld/                         # Build directory for results
+```
 
-Example: Setting Parameters
-Edit src/social_hierarchies/task_parameters.py to configure your simulation:
+### Example: Setting Parameters
+
+Edit `src/social_hierarchies/task_parameters.py` to configure your simulation:
+
+```python
 parameters = {
     "m": 2,              # memory size
     "k": 1,              # sample size
@@ -63,27 +70,28 @@ parameters["payoffs"] = np.array([
     [(1, 1), (0, -1)],
     [(-1, 0), (1, 1)]
 ])
+```
 
+## Key Concepts
 
-Key Concepts
+- **State Space**: Represents the history of play between agents
+- **Transition Matrices**: Capture how the system evolves with and without perturbations
+- **Recurrent Communication Classes (RCC)**: Sets of states that communicate with each other
+- **Stochastic Potential**: Measures the difficulty of transitioning between RCCs
+- **Edmonds' Algorithm**: Finds the minimum stochastic potential states
 
-State Space: Represents the history of play between agents
-Transition Matrices: Capture how the system evolves with and without perturbations
-Recurrent Communication Classes (RCC): Sets of states that communicate with each other
-Stochastic Potential: Measures the difficulty of transitioning between RCCs
-Edmonds' Algorithm: Finds the minimum stochastic potential states
+## Outputs
 
-Outputs
-The analysis produces several outputs in the bld/ directory:
+The analysis produces several outputs in the `bld/` directory:
 
-Transition matrices for perturbed and unperturbed processes
-Stochastically stable states
-Visualizations of:
+- Transition matrices for perturbed and unperturbed processes
+- Stochastically stable states
+- Visualizations of:
+  - RCC graphs
+  - Stationary distributions
+  - Edmonds' arborescences
+  - Shortest paths between states
 
-RCC graphs
-Stationary distributions
-Edmonds' arborescences
-Shortest paths between states
 
 ## Credits
 
@@ -97,5 +105,7 @@ and the
 Young, H. Peyton. "The evolution of conventions." Econometrica: Journal of the Econometric Society (1993): 57-84.
 
 
-License
+## License
+
 This project is licensed under the MIT License - see the LICENSE file for details.
+
