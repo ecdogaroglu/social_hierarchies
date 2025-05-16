@@ -4,14 +4,9 @@
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/ecdogaroglu/social_hierarchies/main.svg)](https://results.pre-commit.ci/latest/github/ecdogaroglu/social_hierarchies/main)
 [![image](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-## Abstract
-
-This paper explores the dynamics of social hierarchies, where agents possess strategic decision making abilities. Such abilities allow the agents to "have a say" on their lifetime destiny by responding optimally to the past play, while they are still subject to limitations of their social environment.
-I deploy the adaptive play of Young (1993) in a social hierarchy
-structure, give a novel characterization of social mobility dynamics in a framework with sophisticated
-decision making abilities and model the resulting stochastic process as a Markov chain.
-Then I employ several perturbations of the stochastic process and use graph theory to explore 
-the asymptotic behavior of this social system.
+A Python implementation for analyzing the emergence and stability of social hierarchies through evolutionary game theory and stochastic processes.
+Description
+This repository contains a collection of tools for modeling strategic interactions between players using Markov chains and graph theory. The main focus is on identifying stochastically stable states and minimum stochastic potential equilibria, which help understand how social hierarchies emerge and persist over time.
 
 See social_hierarchies.pdf for the related research paper including the theory developed and a discussion of the computational results.
 
@@ -32,39 +27,62 @@ To build the project, type
 $ pytask
 ```
 
+Project Structure
+social-hierarchies/
+├── src/
+│   └── social_hierarchies/
+│       ├── config.py            # Project configuration
+│       ├── dynamics/            # Core stochastic process implementations
+│       │   ├── graph.py         # Directed graph analysis
+│       │   ├── markov_chain.py  # Markov chain computations
+│       │   ├── probabilities.py # Probability calculations
+│       │   └── task_dynamics.py # Pytask definitions for dynamics
+│       ├── final/               # Results processing
+│       │   ├── plot.py          # Plotting functions
+│       │   └── task_final.py    # Pytask definitions for plotting
+│       ├── game/                # Game theory components
+│       │   ├── game.py          # State space and best response
+│       │   └── task_game.py     # Pytask definitions for games
+│       └── task_parameters.py   # Parameter management
+├── paper/                       # Documentation/research outputs
+└── bld/                         # Build directory for results
 
-## Modules
 
-### task_parameters.py
+Example: Setting Parameters
+Edit src/social_hierarchies/task_parameters.py to configure your simulation:
+pythonparameters = {
+    "m": 2,              # memory size
+    "k": 1,              # sample size
+    "epsilon": 0.0001,   # experimentation probability
+    "num_act": 2,        # number of actions
+    "num_players": 2,    # number of players (only 2 is supported)
+    "l": 2,              # hierarchy levels
+}
 
-This is where the parametrization takes place and stored temporarily for the global acccess throughout the project.
+# Define game payoffs
+parameters["payoffs"] = np.array([
+    [(1, 1), (0, -1)],
+    [(-1, 0), (1, 1)]
+])
+Key Concepts
 
-### game.py
+State Space: Represents the history of play between agents
+Transition Matrices: Capture how the system evolves with and without perturbations
+Recurrent Communication Classes (RCC): Sets of states that communicate with each other
+Stochastic Potential: Measures the difficulty of transitioning between RCCs
+Edmonds' Algorithm: Finds the minimum stochastic potential states
 
-This module handles the creation of the state space from the given parameters and computes best response probabilities
-that are fundamental for the characterization of the stochastic processes.
+Outputs
+The analysis produces several outputs in the bld/ directory:
 
+Transition matrices for perturbed and unperturbed processes
+Stochastically stable states
+Visualizations of:
 
-### probabilities.py
-
-This module characterizes the social mobility dynamics by computing the corresponding transition probabilities with the help of best response probabilities.
-
-### markov_chain.py
-
-Through transition probabilities, transition matrices of the two Markov chains and their
-important properties like recurrent communication classes and the stationary distribution are calculated.
-
-### graph.py
-
-Through utilization of best response probabilities, weights of two directed graphs are calculated. While the first graph takes states of the stochastic process as vertices, the second one takes the recurrent communication classes of the unperturbed process as vertices. The graphs allow for the utilization of the shortest path and the optimum arboresence algorithms.
-
-### plot.py
-
-The stationary distribution, graph of recurrent communication classes, shortest path and minimum arboresences are plotted for a better visual understanding.
-
-### social_hiearchies.tex
-
-Analyse the research results to be complied into a pdf file.
+RCC graphs
+Stationary distributions
+Edmonds' arborescences
+Shortest paths between states
 
 ## Credits
 
@@ -76,3 +94,7 @@ and the
 ## References
 
 Young, H. Peyton. "The evolution of conventions." Econometrica: Journal of the Econometric Society (1993): 57-84.
+
+
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
